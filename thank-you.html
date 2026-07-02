@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thank You — Ujjwal.fx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500&family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+::-webkit-scrollbar{width:2px}
+::-webkit-scrollbar-track{background:#020205}
+::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,#c9a84c,#3a8fff);border-radius:2px}
+
+:root{
+  --bg:#020205;--bg2:#07070f;--panel:#0c0c1c;
+  --gold:#c9a84c;--gold2:#e8c96a;--gold3:#a07830;
+  --blue:#3a8fff;--blue2:#60aaff;
+  --white:#f4efe6;--muted:rgba(244,239,230,0.55);--faint:rgba(244,239,230,0.22);
+  --border:rgba(201,168,76,0.14);--borderh:rgba(201,168,76,0.4);
+  --font-d:'Playfair Display',serif;--font-s:'Space Grotesk',sans-serif;--font-b:'Outfit',sans-serif;
+}
+body{
+  background:var(--bg);color:var(--white);font-family:var(--font-b);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;overflow-x:hidden;position:relative;line-height:1.7;
+}
+
+@keyframes lightLeak1{0%,100%{opacity:0;transform:translateX(-100%) skewX(-20deg)}15%,85%{opacity:0}30%,70%{opacity:1}50%{opacity:0.6}}
+@keyframes lightLeak2{0%,100%{opacity:0;transform:translateX(100%) skewX(15deg)}20%,80%{opacity:0}40%,60%{opacity:0.8}}
+@keyframes grainAnim{0%,100%{transform:translate(0,0)}10%{transform:translate(-1%,-1%)}20%{transform:translate(1%,1%)}30%{transform:translate(-1%,1%)}40%{transform:translate(1%,-1%)}50%{transform:translate(-2%,0)}60%{transform:translate(2%,0)}70%{transform:translate(0,-2%)}80%{transform:translate(0,2%)}90%{transform:translate(-1%,-1%)}}
+@keyframes checkPop{0%{transform:scale(0) rotate(-20deg)}60%{transform:scale(1.15) rotate(4deg)}100%{transform:scale(1) rotate(0deg)}}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.35)}50%{box-shadow:0 0 0 18px rgba(201,168,76,0)}}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.9) translateY(20px)}to{opacity:1;transform:none}}
+@keyframes sparkle{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes progressGlow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.light-leak{position:absolute;top:0;bottom:0;width:100px;background:linear-gradient(to bottom,transparent 0%,rgba(201,168,76,0.14) 20%,rgba(58,143,255,0.09) 50%,rgba(201,168,76,0.07) 80%,transparent 100%);filter:blur(16px)}
+.light-leak-1{left:10%;animation:lightLeak1 9s ease-in-out infinite}
+.light-leak-2{right:14%;animation:lightLeak2 12s ease-in-out infinite 3s}
+#grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grainAnim 0.08s steps(1) infinite}
+#vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(2,2,5,0.75) 100%)}
+#progress{position:fixed;top:0;left:0;height:2px;z-index:10;background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2),var(--blue),var(--blue2),var(--gold));background-size:200% 100%;animation:progressGlow 2s linear infinite;width:100%}
+
+.card{
+  position:relative;z-index:2;max-width:560px;width:100%;
+  padding:64px 52px;text-align:center;border-radius:24px;
+  background:linear-gradient(135deg,rgba(12,12,28,0.92) 0%,rgba(7,7,15,0.97) 100%);
+  border:1px solid var(--border);
+  box-shadow:0 30px 100px rgba(0,0,0,0.6),0 0 120px rgba(201,168,76,0.08),inset 0 1px 0 rgba(201,168,76,0.08);
+  animation:scaleIn 0.9s cubic-bezier(.16,1,.3,1) both;
+  transform-style:preserve-3d;transition:transform 0.2s ease;
+}
+.check-wrap{width:100px;height:100px;border-radius:50%;margin:0 auto 32px;position:relative;background:radial-gradient(circle,rgba(201,168,76,0.12),rgba(201,168,76,0.02));border:1px solid rgba(201,168,76,0.45);display:flex;align-items:center;justify-content:center;animation:ringPulse 2.6s ease-in-out infinite}
+.check-mark{font-size:44px;color:var(--gold2);animation:checkPop 0.6s cubic-bezier(.16,1,.3,1) 0.25s both;filter:drop-shadow(0 0 12px rgba(201,168,76,0.5))}
+.spark{position:absolute;font-size:12px;color:var(--gold2);animation:sparkle 2.4s ease-in-out infinite}
+.eyebrow{font-family:var(--font-s);font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.headline{font-family:var(--font-d);font-weight:300;font-size:clamp(38px,7vw,58px);line-height:1.05;background:linear-gradient(135deg,var(--gold3) 0%,var(--gold2) 35%,var(--gold) 65%,var(--blue2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.sub{font-family:var(--font-d);font-style:italic;font-size:18px;color:var(--muted);margin-bottom:22px;letter-spacing:0.02em}
+.body-text{font-family:var(--font-b);font-weight:300;color:var(--muted);font-size:14.5px;line-height:1.85;margin-bottom:34px}
+.divider{display:flex;align-items:center;gap:16px;margin:8px 0 32px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold3) 30%,var(--gold3) 70%,transparent);opacity:0.4}
+.badge-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.badge{font-family:var(--font-s);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;padding:8px 16px;border-radius:100px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.25);color:var(--gold)}
+.badge.b{background:rgba(58,143,255,0.07);border-color:rgba(58,143,255,0.22);color:var(--blue2)}
+.steps{text-align:left;margin-bottom:40px;display:flex;flex-direction:column;gap:14px}
+.step{display:flex;align-items:flex-start;gap:14px;font-family:var(--font-b);font-size:13.5px;color:var(--muted)}
+.step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-s);font-size:11px;color:var(--gold);font-weight:700}
+.btn-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;padding:15px 34px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold3) 0%,var(--gold) 50%,var(--gold2) 100%);color:#06040a;font-family:var(--font-s);font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all 0.3s cubic-bezier(.16,1,.3,1)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(201,168,76,0.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--white);font-family:var(--font-s);font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all 0.3s cubic-bezier(.16,1,.3,1)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue2);transform:translateY(-2px);box-shadow:0 0 24px rgba(58,143,255,0.12)}
+.foot-note{margin-top:34px;font-family:var(--font-s);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(2,2,5,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--font-d);font-size:24px;background:linear-gradient(135deg,var(--gold3) 0%,var(--gold2) 40%,var(--gold) 70%,var(--blue2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-link{font-family:var(--font-s);font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.nav-link:hover{color:var(--gold)}
+body{padding-top:68px}
+
+@media(max-width:600px){.card{padding:48px 26px}.btn-row{flex-direction:column}.btn-gold,.btn-ghost{justify-content:center;width:100%}nav{padding:0 20px}.nav-links{gap:16px}}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ujjwal.fx</a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="index.html#services" class="nav-link">Services</a>
+    <a href="index.html#portfolio" class="nav-link">Portfolio</a>
+    <a href="client-dashboard.html" class="nav-link">My Orders</a>
+  </div>
+</nav>
+
+<div id="bg">
+  <div class="light-leak light-leak-1"></div>
+  <div class="light-leak light-leak-2"></div>
+</div>
+<div id="grain"></div>
+<div id="vignette"></div>
+
+<div class="card" id="tiltCard">
+  <div class="check-wrap">
+    <span class="check-mark">✓</span>
+    <span class="spark" style="top:2px;right:6px;animation-delay:0.2s">✦</span>
+    <span class="spark" style="bottom:6px;left:0;animation-delay:1s;font-size:9px">✦</span>
+  </div>
+
+  <span class="eyebrow">Booking Confirmed</span>
+  <h1 class="headline">Thank You</h1>
+  <p class="sub">for choosing Ujjwal.fx</p>
+
+  <p class="body-text">
+    Your project details have been received. I personally review every booking —
+    you'll be contacted shortly with a tailored quote and timeline for your edit.
+  </p>
+
+  <div class="badge-row">
+    <span class="badge">✦ Reply within 24 hrs</span>
+    <span class="badge b">Every Frame Speaks Quality</span>
+  </div>
+
+  <div class="divider"><span style="font-size:14px;color:var(--gold)">✦</span></div>
+
+  <div class="steps">
+    <div class="step"><span class="step-num">1</span><span>Your booking is logged and queued for review.</span></div>
+    <div class="step"><span class="step-num">2</span><span>I'll check your footage links and project brief.</span></div>
+    <div class="step"><span class="step-num">3</span><span>You'll receive a message on WhatsApp or email with next steps and pricing.</span></div>
+  </div>
+
+  <div class="btn-row">
+    <a href="index.html" class="btn-gold">🏠 Back to Home</a>
+    <a href="https://wa.me/918572046300" target="_blank" class="btn-ghost">📱 WhatsApp Me</a>
+  </div>
+
+  <p class="foot-note">Ujjwal.fx · Professional Video Editing</p>
+</div>
+
+<script>
+const card = document.getElementById('tiltCard');
+card.addEventListener('mousemove', e => {
+  const r = card.getBoundingClientRect();
+  const cx = (e.clientX - r.left) / r.width;
+  const cy = (e.clientY - r.top) / r.height;
+  const rx = (cy - 0.5) * 8;
+  const ry = (cx - 0.5) * -8;
+  card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.01)`;
+});
+card.addEventListener('mouseleave', () => {
+  card.style.transition = 'transform 0.6s cubic-bezier(.16,1,.3,1)';
+  card.style.transform = '';
+  setTimeout(()=>card.style.transition='transform 0.15s ease',600);
+});
+
+// If arriving with an order id in the URL, show it
+const params = new URLSearchParams(window.location.search);
+const orderId = params.get('order');
+if(orderId){
+  const p = document.createElement('p');
+  p.className = 'foot-note';
+  p.style.marginTop = '14px';
+  p.textContent = 'Reference ID: ' + orderId;
+  document.querySelector('.card').appendChild(p);
+}
+</script>
+</body>
+</html>
